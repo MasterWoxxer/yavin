@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yavin Institute</title>
+<meta name="description" content="Yavin Institute — המבין יבין. Those who understand, will understand.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Frank+Ruhl+Libre:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+
+<div class="stars"><canvas id="sky"></canvas></div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="#"><span class="y">yavin</span><span class="i">Institute</span></a>
+    <span class="etym"><b>yavin</b> (v.) (future) <span class="q">“he will understand”</span></span>
+    <div class="links">
+      <a class="join" href="#join">Join</a>
+      <a href="#about">About</a>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section class="hero">
+    <!-- Seal: shield with YAVIN over an open book reading המבין יבין (à la Yale's אורים ותמים), Star of David below -->
+    <svg class="seal" viewBox="0 0 200 230" role="img" aria-label="Yavin Institute seal: a Jerusalem-stone shield with YAVIN over an open book reading המבין יבין, and a raised Star of David">
+      <defs>
+        <!-- Jerusalem stone: pitted, lit surface + honey/rose mottling (scaled to read at logo size) -->
+        <filter id="stone" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.32" numOctaves="2" seed="4" result="pits"/>
+          <feDiffuseLighting in="pits" surfaceScale="1.3" lighting-color="#ffffff" diffuseConstant="1.15" result="lit">
+            <feDistantLight azimuth="225" elevation="58"/>
+          </feDiffuseLighting>
+          <feBlend in="lit" in2="SourceGraphic" mode="multiply" result="surface"/>
+          <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="3" seed="11" result="clouds"/>
+          <feColorMatrix in="clouds" type="matrix" result="mottle"
+            values="0 0 0 0 0.66  0 0 0 0 0.50  0 0 0 0 0.30  0 0 0 2.2 -0.95"/>
+          <feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="2" seed="23" result="clouds2"/>
+          <feColorMatrix in="clouds2" type="matrix" result="rose"
+            values="0 0 0 0 0.86  0 0 0 0 0.66  0 0 0 0 0.56  0 0 0 1.6 -0.8"/>
+          <feMerge result="all"><feMergeNode in="surface"/><feMergeNode in="rose"/><feMergeNode in="mottle"/></feMerge>
+          <feComposite in="all" in2="SourceGraphic" operator="in"/>
+        </filter>
+        <!-- light from upper left across the face of the shield -->
+        <radialGradient id="shade" cx="30%" cy="20%" r="95%">
+          <stop offset="0" stop-color="#fff8e8" stop-opacity="0.35"/>
+          <stop offset="0.6" stop-color="#fff8e8" stop-opacity="0"/>
+          <stop offset="1" stop-color="#5a4424" stop-opacity="0.35"/>
+        </radialGradient>
+        <!-- raised relief: highlight on the upper-left edge, shadow on the lower-right -->
+        <filter id="relief" x="-30%" y="-30%" width="160%" height="160%">
+          <feOffset in="SourceAlpha" dx="1.3" dy="1.7" result="o1"/>
+          <feGaussianBlur in="o1" stdDeviation="0.9" result="b1"/>
+          <feFlood flood-color="#3e2f18" flood-opacity="0.85"/>
+          <feComposite in2="b1" operator="in" result="shadow"/>
+          <feOffset in="SourceAlpha" dx="-0.8" dy="-0.9" result="o2"/>
+          <feGaussianBlur in="o2" stdDeviation="0.4" result="b2"/>
+          <feFlood flood-color="#fffbf0" flood-opacity="0.95"/>
+          <feComposite in2="b2" operator="in" result="hl"/>
+          <feMerge><feMergeNode in="shadow"/><feMergeNode in="hl"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <linearGradient id="starFace" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#f4ead3"/>
+          <stop offset="1" stop-color="#b99e6c"/>
+        </linearGradient>
+        <!-- carved lettering: light catches the lower edge of the cut -->
+        <filter id="carve" x="-10%" y="-20%" width="120%" height="140%">
+          <feOffset in="SourceAlpha" dx="0.6" dy="0.9" result="o"/>
+          <feFlood flood-color="#fffaf0" flood-opacity="0.8"/>
+          <feComposite in2="o" operator="in" result="lip"/>
+          <feMerge><feMergeNode in="lip"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="bookShadow" x="-20%" y="-20%" width="140%" height="150%">
+          <feDropShadow dx="1" dy="2.2" stdDeviation="1.6" flood-color="#3b2d18" flood-opacity="0.5"/>
+        </filter>
+        <linearGradient id="rimGold" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#f6dc8e"/>
+          <stop offset="0.5" stop-color="#d4a843"/>
+          <stop offset="1" stop-color="#8e6620"/>
+        </linearGradient>
+        <!-- YAVIN follows the dip of the book's top edge -->
+        <path id="yavinArc" d="M28 57 Q100 73 172 57" fill="none"/>
+      </defs>
+
+      <!-- stone shield -->
+      <path d="M100 6 L190 30 V110 C190 170 150 205 100 224 C50 205 10 170 10 110 V30 Z" fill="#f2e4c4" filter="url(#stone)"/>
+      <path d="M100 6 L190 30 V110 C190 170 150 205 100 224 C50 205 10 170 10 110 V30 Z" fill="url(#shade)"/>
+      <!-- chiselled inner border -->
+      <path d="M100 16 L180 37 V110 C180 163 145 194 100 212 C55 194 20 163 20 110 V37 Z" fill="none" stroke="#fffaf0" stroke-width="1.2" opacity="0.7" transform="translate(0.7,0.9)"/>
+      <path d="M100 16 L180 37 V110 C180 163 145 194 100 212 C55 194 20 163 20 110 V37 Z" fill="none" stroke="#8f7648" stroke-width="1.2" opacity="0.8"/>
+      <!-- gold rim, set off from the stone by a dark bronze edge -->
+      <path d="M100 6 L190 30 V110 C190 170 150 205 100 224 C50 205 10 170 10 110 V30 Z" fill="none" stroke="#3a2a10" stroke-width="7.5"/>
+      <path d="M100 6 L190 30 V110 C190 170 150 205 100 224 C50 205 10 170 10 110 V30 Z" fill="none" stroke="url(#rimGold)" stroke-width="4.5"/>
+
+      <text font-family="Cinzel, serif" font-weight="700" font-size="27" letter-spacing="2" fill="#6e5020" text-anchor="middle" filter="url(#carve)">
+        <textPath href="#yavinArc" startOffset="50%">YAVIN</textPath>
+      </text>
+
+      <!-- open book -->
+      <g transform="translate(20,34) scale(0.8)" filter="url(#bookShadow)">
+        <path d="M100 62 C82 52 58 50 36 54 V132 C58 128 82 130 100 140 Z" fill="#fbf6ea"/>
+        <path d="M100 62 C118 52 142 50 164 54 V132 C142 128 118 130 100 140 Z" fill="#f1e8d3"/>
+        <path d="M100 62 V140" stroke="#9c7a2e" stroke-width="1.5"/>
+        <!-- Hebrew reads right to left: right page first -->
+        <text x="132" y="104" text-anchor="middle" font-family="Frank Ruhl Libre, serif" font-weight="700" font-size="24" fill="#07080d" direction="rtl">המבין</text>
+        <text x="68"  y="104" text-anchor="middle" font-family="Frank Ruhl Libre, serif" font-weight="700" font-size="24" fill="#07080d" direction="rtl">יבין</text>
+      </g>
+
+      <!-- Star of David, raised from the stone -->
+      <g fill="url(#starFace)" filter="url(#relief)">
+        <path d="M100 167 L113 189.5 L87 189.5 Z"/>
+        <path d="M100 197 L113 174.5 L87 174.5 Z"/>
+      </g>
+    </svg>
+
+    <div class="title">
+      <h1 class="wordmark" aria-label="Yavin">yavin</h1>
+      <div class="institute">Institute</div>
+    </div>
+
+    <aside class="motto">
+      <div class="he" lang="he">המבין יבין</div>
+      <div class="translit">Ha Mayvin, Yavin</div>
+      <div class="en">those who understand, will understand</div>
+    </aside>
+  </section>
+
+  <div class="rotator" aria-live="polite">
+    <span class="on">A House of Learning</span>
+    <span>A School for Brilliant Misfits</span>
+    <span>The Anti-Woke Anti-University</span>
+    <span>Join the Rebellion</span>
+  </div>
+
+  <!-- INTRO: five paragraphs, slow continuous scroll -->
+  <section class="intro" aria-label="About Yavin Institute">
+    <div class="chunks">
+      <p class="chunk">
+        Universities have failed us, with ideological capture, wildly inflated costs, loans that indenture young
+        people for half their lives, don't prepare them well anymore for careers or entrepreneurship, and long since
+        abandoned any pretense of wisdom or morals on how to live a good life.
+      </p>
+      <p class="chunk">
+        Yavin aspires to genuinely prepare students for life in the broadest sense: to orient themselves in place,
+        wisdom traditions, see all the ways humans have lived in history, and learn how to learn and think for
+        themselves. That way they are best prepared for all the challenges- not just careers or business, but
+        leadership, causes, and thoughtful application of their full body and soul to find and choose their mission.
+      </p>
+      <p class="chunk">
+        The Way to learn is not the western-school model, but <em>the yeshiva model</em>:
+        hevrutas, core texts, holistic approach that has a certain expectation of personal growth towards
+        next stages of life. Encourages and empowers students to grow so that they become ready to build lives,
+        start businesses, incorporate and transcend the values and structures of their origins and upbringings.
+      </p>
+      <p class="chunk">
+        <em>The Study of Human Life:</em> what works and what doesn't work? Community, technology, polity, history.
+        What are goals for human societies large and small? What produces happiness? What choices—of belief,
+        communal forms, technologies, ideologies—lead to what outcomes? What possibilities are there for your
+        community, and humanity, that are genuinely new?
+      </p>
+      <p class="chunk">
+        After studying here, the goal is for each student to have developed knowledge and skills to be
+        <em>an entrepreneur, a community builder, a jedi, or a revolutionary</em>… as necessary.
+      </p>
+    </div>
+  </section>
+
+  <!-- CARDS -->
+  <section class="cards">
+    <a class="card" href="#publishing">
+      <div class="num" lang="he">א</div>
+      <h3>Academic Publishing</h3>
+      <ul>
+        <li>Journal Negative Space</li>
+        <li>Transparent Peer Review</li>
+        <li>The Dark Ages Chronicle</li>
+      </ul>
+      <span class="go">Read →</span>
+    </a>
+
+    <a class="card" href="#talmud">
+      <div class="num" lang="he">ב</div>
+      <h3>New Jerusalem Talmud</h3>
+      <span class="go">Enter →</span>
+    </a>
+
+    <a class="card" href="#apply-learn">
+      <div class="num" lang="he">ג</div>
+      <h3>Apply to Learn</h3>
+      <span class="go">Apply →</span>
+    </a>
+
+    <a class="card" href="#apply-teach">
+      <div class="num" lang="he">ד</div>
+      <h3>Apply to Teach</h3>
+      <span class="go">Apply →</span>
+    </a>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <span class="where">
+      <svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+      At an undisclosed location in the Middle East, <span class="hidden">hidden away in the Holy Land.</span>
+    </span>
+    <span class="fine">Yavin Institute · <span lang="he">המבין יבין</span></span>
+  </div>
+</footer>
+
+<script src="assets/js/site.js"></script>
+</body>
+</html>
