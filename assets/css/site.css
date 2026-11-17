@@ -208,6 +208,9 @@ main .cards { margin-top: auto; padding: 0 0 12px; }
 .card ul { list-style: none; color: var(--muted); font-size: 18px; }
 .card li { padding: 2px 0; font-size: 17px; border-top: 1px solid rgba(255,255,255,0.06); }
 .card li:first-child { border-top: 0; }
+.card li a { display: flex; justify-content: space-between; gap: 8px; color: inherit; text-decoration: none; transition: color 0.2s; }
+.card li a::after { content: "→"; color: var(--gold); }
+.card li a:hover { color: var(--gold); }
 .card p { color: var(--muted); font-size: 18px; }
 .card .go {
   margin-top: auto;
