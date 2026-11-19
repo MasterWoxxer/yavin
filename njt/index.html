@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>New Jerusalem Talmud · Yavin Institute</title>
+<meta name="description" content="The New Jerusalem Talmud brings the talmudic discussion and non-linear graphic format back to life to discuss current topics and controversies, secular or religious.">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Frank+Ruhl+Libre:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="njt.css">
+</head>
+<body>
+
+<header class="runhead">
+  <a href="../">← Yavin<span class="long"> Institute</span></a>
+  <span class="mid">New Jerusalem Talmud</span>
+  <span lang="he">מסכת א</span>
+</header>
+
+<div class="wrap njt">
+
+  <header class="njt-head">
+    <h1><span class="frame">New Jerusalem Talmud</span></h1>
+    <p class="lead"><span class="opening">The New Jerusalem Talmud</span> brings the talmudic discussion and non-linear graphic format back to life to discuss current topics and controversies, secular or religious.</p>
+    <p>Instead of the Socratic there's only two sides, and only one can be ‘right’: rather, in talmudic discussions, <strong>we recognize that there can be more than two sides, maybe all of them are ‘right’ depending on which lineage, values, school of thought, or basis they are coming from. It's an emergent process, like life itself.</strong></p>
+  </header>
+
+  <section class="njt-dafs" aria-labelledby="dafs-h">
+    <div class="njt-dafs-head">
+      <h2 id="dafs-h">Maseket 1 · The Formative Dafs</h2>
+      <a class="njt-all" href="dafs/njt-maseket-1-formative-dafs.pdf" download>Download all four (one PDF)</a>
+    </div>
+
+    <ul class="njt-grid">
+      <li><a class="daf is-on" href="dafs/daf-population.pdf" data-title="Daf: Population">
+        <img src="dafs/daf-population.jpg" alt="Daf: Population, first page" width="550" height="850" loading="lazy">
+        <span class="t">Population</span></a></li>
+      <li><a class="daf" href="dafs/daf-expertise.pdf" data-title="Daf: Expertise">
+        <img src="dafs/daf-expertise.jpg" alt="Daf: Expertise, first page" width="550" height="850" loading="lazy">
+        <span class="t">Expertise</span></a></li>
+      <li><a class="daf" href="dafs/daf-climate-change.pdf" data-title="Daf: Climate Change">
+        <img src="dafs/daf-climate-change.jpg" alt="Daf: Climate Change, first page" width="550" height="850" loading="lazy">
+        <span class="t">Climate Change</span></a></li>
+      <li><a class="daf" href="dafs/daf-assimilation.pdf" data-title="Daf: Assimilation">
+        <img src="dafs/daf-assimilation.jpg" alt="Daf: Assimilation, first page" width="550" height="850" loading="lazy">
+        <span class="t">Assimilation</span></a></li>
+    </ul>
+
+    <div class="njt-viewer" id="viewer">
+      <div class="njt-viewer-bar">
+        <span class="title" data-el="vtitle">Daf: Population</span>
+        <a data-el="vopen" href="dafs/daf-population.pdf" target="_blank" rel="noopener">Open full screen ↗</a>
+      </div>
+      <iframe data-el="vframe" src="dafs/daf-population.pdf#view=FitH" title="Daf: Population"></iframe>
+    </div>
+  </section>
+
+</div>
+
+<footer class="colophon">
+  <a href="../">Yavin Institute</a> · <span lang="he">המבין יבין</span>
+</footer>
+
+<script>
+// Wide screens: a daf opens in the viewer below the grid. Phones open the PDF itself.
+(function () {
+  const wide = () => matchMedia('(min-width: 760px)').matches;
+  const frame = document.querySelector('[data-el=vframe]');
+  const title = document.querySelector('[data-el=vtitle]');
+  const open = document.querySelector('[data-el=vopen]');
+  document.querySelectorAll('.daf').forEach(a => a.addEventListener('click', e => {
+    if (!wide()) { a.target = '_blank'; return; }
+    e.preventDefault();
+    document.querySelectorAll('.daf').forEach(d => d.classList.toggle('is-on', d === a));
+    frame.src = a.getAttribute('href') + '#view=FitH';
+    frame.title = title.textContent = a.dataset.title;
+    open.href = a.getAttribute('href');
+    document.getElementById('viewer').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }));
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+/* New Jerusalem Talmud page: the look of a printed Talmud page — cream paper, black ink,
+   ruled frames, a running head, and a large opening word. Standalone (no main-site styles). */
+
+:root {
+  --paper: #f4ecd8;
+  --paper-2: #fbf6e9;
+  --ink: #1d1a14;
+  --muted: #5e5546;
+  --rule: #2a251c;
+  --hair: rgba(42, 37, 28, 0.35);
+  --serif: "EB Garamond", Georgia, "Times New Roman", serif;
+  --square: "Frank Ruhl Libre", "Times New Roman", serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--paper);
+  background-image: radial-gradient(ellipse at 50% 0%, rgba(255, 252, 240, 0.7), transparent 70%);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--ink); text-underline-offset: 3px; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+/* running head, as at the top of every daf */
+.runhead {
+  max-width: 1120px; margin: 0 auto; padding: 14px 24px 8px;
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: baseline; gap: 16px;
+  border-bottom: 2px solid var(--rule);
+  font-size: 16px;
+}
+.runhead a { text-decoration: none; color: var(--muted); }
+.runhead a:hover { color: var(--ink); text-decoration: underline; }
+.runhead .mid { font-family: var(--square); font-weight: 700; font-size: 18px; letter-spacing: 0.04em; }
+.runhead [lang="he"] { justify-self: end; font-family: var(--square); font-weight: 700; font-size: 20px; }
+
+.njt { padding-top: 26px; padding-bottom: 40px; }
+
+/* the central text block */
+.njt-head {
+  max-width: 820px; margin: 0 auto; text-align: justify;
+  border: 1px solid var(--rule); outline: 1px solid var(--rule); outline-offset: 4px;
+  background: var(--paper-2); padding: 26px 32px 28px;
+}
+.njt-head h1 { text-align: center; margin-bottom: 18px; }
+.njt-head .frame {
+  display: inline-block; font-family: var(--square); font-weight: 700; font-size: clamp(30px, 4.4vw, 46px); line-height: 1.1;
+  padding: 2px 18px; border-left: 3px solid var(--rule); border-right: 3px solid var(--rule);
+}
+.njt-head .lead { font-size: 23px; line-height: 1.5; }
+.njt-head .opening { font-family: var(--square); font-weight: 900; font-size: 1.15em; }
+.njt-head p + p { margin-top: 14px; font-size: 20px; }
+.njt-head strong { font-weight: 600; }
+
+/* the dafs */
+.njt-dafs { margin-top: 34px; }
+.njt-dafs-head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  border-top: 2px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 8px 0; margin-bottom: 18px;
+}
+.njt-dafs-head h2 { font-family: var(--square); font-weight: 700; font-size: 20px; }
+.njt-all { font-size: 17px; }
+
+.njt-grid { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.daf {
+  display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: var(--ink);
+  padding: 8px; border: 1px solid var(--hair); background: var(--paper-2);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.daf img { width: 100%; height: auto; aspect-ratio: 550 / 850; object-fit: cover; object-position: top; display: block; background: #fff; border: 1px solid var(--hair); }
+.daf .t { font-family: var(--square); font-size: 20px; font-weight: 700; text-align: center; }
+.daf:hover { border-color: var(--rule); box-shadow: 0 2px 10px rgba(40, 30, 10, 0.15); }
+.daf.is-on { border: 2px solid var(--rule); padding: 7px; }
+
+.njt-viewer { margin-top: 26px; border: 2px solid var(--rule); scroll-margin-top: 12px; background: var(--paper-2); }
+.njt-viewer-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 8px 14px; border-bottom: 1px solid var(--rule); }
+.njt-viewer-bar .title { font-family: var(--square); font-size: 20px; font-weight: 700; }
+.njt-viewer-bar a { font-size: 16px; }
+.njt-viewer iframe { display: block; width: 100%; height: calc(100vh - 80px); min-height: 560px; border: 0; background: #fff; }
+
+.colophon { text-align: center; padding: 18px 16px 30px; border-top: 2px solid var(--rule); max-width: 1120px; margin: 0 auto; font-size: 16px; color: var(--muted); }
+.colophon a { color: var(--muted); }
+.colophon [lang="he"] { font-family: var(--square); }
+
+@media (max-width: 900px) {
+  .njt-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 759px) {
+  .njt-viewer { display: none; }   /* phones open the PDF itself */
+}
+@media (max-width: 560px) {
+  body { font-size: 18px; }
+  .wrap { padding: 0 16px; }
+  .runhead { padding: 12px 16px 6px; font-size: 14px; }
+  .runhead .mid { font-size: 15px; }
+  .njt-head { padding: 18px 16px 20px; text-align: left; }
+  .njt-head .lead { font-size: 20px; }
+  .njt-head p + p { font-size: 18px; }
+  .njt-grid { gap: 12px; }
+  .daf .t { font-size: 17px; }
+}
+.runhead a { white-space: nowrap; }
+@media (max-width: 560px) { .runhead .long { display: none; } }
