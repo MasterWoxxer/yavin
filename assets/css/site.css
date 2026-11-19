@@ -153,7 +153,8 @@ main.wrap {
   opacity: 0.6;
 }
 .intro .chunk em { font-style: normal; color: var(--gold); }
-.intro .taglines span { display: block; font-style: italic; color: var(--gold); font-size: 1.35em; line-height: 1.3; }
+.intro .tagline { font-style: italic; color: var(--gold); font-size: 34px; line-height: 1.2; }
+.intro .tagline::after { display: none; }
 @media (prefers-reduced-motion: reduce) {
   .intro { overflow-y: auto; }
 }
@@ -189,20 +190,21 @@ main.wrap {
   font-weight: 500; font-size: 14px; letter-spacing: 0.28em; text-transform: uppercase;
   color: var(--gold); padding-bottom: 10px; border-bottom: 1px solid var(--line);
 }
-.depts ul { list-style: none; }
+.depts ul { list-style: none; flex: 1; display: flex; flex-direction: column; }
+.depts li { flex: 1 1 auto; display: flex; }
 .depts li { border-bottom: 1px solid var(--line); }
 .depts a {
-  display: grid; grid-template-columns: 30px 1fr auto; column-gap: 12px; align-items: baseline;
-  padding: 4px 10px 5px 4px; color: inherit; text-decoration: none;
+  flex: 1; display: grid; grid-template-columns: 1fr auto; column-gap: 12px; align-items: baseline; align-content: center;
+  padding: 4px 10px 5px 6px; color: inherit; text-decoration: none;
   transition: background 0.2s, color 0.2s;
 }
-.depts a::after { content: "→"; grid-column: 3; grid-row: 1; color: var(--gold); opacity: 0.5; transition: opacity 0.2s, transform 0.2s; }
+.depts a::after { content: "→"; grid-column: 2; grid-row: 1; color: var(--gold); opacity: 0.5; transition: opacity 0.2s, transform 0.2s; }
 .depts a:hover { background: rgba(216,178,90,0.06); }
 .depts a:hover::after { opacity: 1; transform: translateX(3px); }
 .depts a:hover .t { color: var(--gold); }
 .depts .n { grid-row: 1 / span 2; font-family: var(--hebrew); color: var(--gold); font-size: 22px; line-height: 1.2; text-align: center; }
 .depts .t { font-size: 20px; font-weight: 600; line-height: 1.2; transition: color 0.2s; }
-.depts .d { grid-column: 2 / span 2; color: var(--muted); font-size: 15.5px; line-height: 1.3; font-style: italic; }
+.depts .d { grid-column: 1 / span 2; color: var(--muted); font-size: 15.5px; line-height: 1.3; font-style: italic; }
 
 /* ---------- FOOTER ---------- */
 body { padding-bottom: 56px; }
@@ -240,6 +242,8 @@ footer .fine [lang="he"] { letter-spacing: 0; font-family: var(--hebrew); font-s
   main.wrap { height: auto; }
   .body-grid { grid-template-columns: 1fr; gap: 28px; }
   .body-grid .intro { contain: none; height: 300px; }
+  .depts li { flex: none; }
+  .depts a { padding-top: 8px; padding-bottom: 8px; }
 }
 @media (max-width: 560px) {
   body { font-size: 17px; }
