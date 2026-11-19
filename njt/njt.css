@@ -35,7 +35,7 @@ a { color: var(--ink); text-underline-offset: 3px; }
 .runhead a { text-decoration: none; color: var(--muted); }
 .runhead a:hover { color: var(--ink); text-decoration: underline; }
 .runhead .mid { font-family: var(--square); font-weight: 700; font-size: 18px; letter-spacing: 0.04em; }
-.runhead [lang="he"] { justify-self: end; font-family: var(--square); font-weight: 700; font-size: 20px; }
+.runhead .mas { justify-self: end; text-align: right; font-family: var(--square); font-weight: 700; font-size: 16px; }
 
 .njt { padding-top: 26px; padding-bottom: 40px; }
 
@@ -104,3 +104,4 @@ a { color: var(--ink); text-underline-offset: 3px; }
 }
 .runhead a { white-space: nowrap; }
 @media (max-width: 560px) { .runhead .long { display: none; } }
+@media (max-width: 560px) { .runhead { gap: 10px; } .runhead .mas { font-size: 13px; line-height: 1.2; } .runhead .mid { font-size: 14px; white-space: nowrap; } }
