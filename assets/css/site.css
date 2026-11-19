@@ -47,10 +47,10 @@ body {
 
 /* page fills the screen; cards sit at the bottom, just above the location bar */
 main.wrap {
-  height: max(640px, calc(100vh - 61px - 49px));   /* screen minus nav and location bar */
+  min-height: max(560px, calc(100vh - 61px - 49px));   /* screen minus nav and location bar */
   display: flex; flex-direction: column;
 }
-main .cards { margin-top: auto; padding: 0 0 12px; }
+
 
 /* ---------- NAV ---------- */
 .nav {
@@ -80,19 +80,20 @@ main .cards { margin-top: auto; padding: 0 0 12px; }
 /* ---------- HERO ---------- */
 .hero {
   display: grid;
-  grid-template-columns: 290px 1fr 290px;
+  grid-template-columns: 220px 1fr 220px;
   align-items: center;
-  gap: 32px;
-  padding: 16px 0 0;
+  gap: 24px;
+  padding: 10px 0 8px;
+  border-bottom: 1px solid var(--line);
 }
-.hero .seal { width: 130px; justify-self: start; }
+.hero .seal { width: 72px; justify-self: start; }
 
 .seal { width: 100%; height: auto; filter: drop-shadow(0 0 24px rgba(216,178,90,0.18)); }
 
 .title { text-align: center; }
 .wordmark {
   font-family: var(--jedi);
-  font-size: clamp(40px, 8vw, 100px);
+  font-size: clamp(36px, 5vw, 60px);
   line-height: 0.9;
   color: transparent;
   -webkit-text-stroke: 1.5px var(--gold);
@@ -103,8 +104,8 @@ main .cards { margin-top: auto; padding: 0 0 12px; }
   font-weight: 500;
   letter-spacing: 0.6em;
   text-transform: uppercase;
-  font-size: clamp(12px, 1.5vw, 15px);
-  margin-top: 12px;
+  font-size: 12px;
+  margin-top: 6px;
   padding-left: 0.6em; /* balance letter-spacing */
 }
 
@@ -130,8 +131,7 @@ main .cards { margin-top: auto; padding: 0 0 12px; }
   flex: 1 1 0;
   min-height: 0;
   width: 100%;
-  max-width: 1000px;
-  margin: 6px auto 10px;
+  margin: 0;
   text-align: center;
   overflow: hidden;
   position: relative;
@@ -140,7 +140,7 @@ main .cards { margin-top: auto; padding: 0 0 12px; }
 }
 .intro .chunks { will-change: transform; }
 .intro .chunk {
-  font-size: 28.5px;
+  font-size: 24px;
   line-height: 1.45;
   padding-bottom: 1.6em;
 }
@@ -153,6 +153,7 @@ main .cards { margin-top: auto; padding: 0 0 12px; }
   opacity: 0.6;
 }
 .intro .chunk em { font-style: normal; color: var(--gold); }
+.intro .taglines span { display: block; font-style: italic; color: var(--gold); font-size: 1.35em; line-height: 1.3; }
 @media (prefers-reduced-motion: reduce) {
   .intro { overflow-y: auto; }
 }
@@ -161,65 +162,47 @@ main .cards { margin-top: auto; padding: 0 0 12px; }
 .motto {
   text-align: center;
   border-left: 1px solid var(--line);
-  padding-left: 32px;
+  padding-left: 20px;
 }
 .motto .he {
   font-family: var(--hebrew);
   font-weight: 500;
-  font-size: 52px;
+  font-size: 32px;
   line-height: 1.1;
   color: var(--gold);
   direction: rtl;
 }
-.motto .translit { margin-top: 10px; font-size: 22px; letter-spacing: 0.08em; }
-.motto .en { font-style: italic; color: var(--muted); font-size: 17px; line-height: 1.3; margin-top: 4px; white-space: nowrap; }
+.motto .translit { margin-top: 4px; font-size: 16px; letter-spacing: 0.08em; }
+.motto .en { font-style: italic; color: var(--muted); font-size: 14px; line-height: 1.3; margin-top: 4px; white-space: nowrap; }
 
-/* ---------- CARDS ---------- */
-.cards {
-  padding: 0 0 32px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+/* ---------- BODY: intro scroll beside the departments ---------- */
+.body-grid {
+  flex: 1 0 auto;
+  display: grid; grid-template-columns: 1fr 460px; gap: 40px;
+  padding: 14px 0 12px;
 }
-.card {
-  position: relative;
-  background: var(--card);
-  border: 1px solid var(--line);
-  padding: 18px 22px 16px;
-  display: flex; flex-direction: column;
-  text-decoration: none; color: inherit;
-  transition: border-color 0.3s, background 0.3s, transform 0.3s;
+.body-grid .intro { contain: size; height: auto; }   /* takes the height the departments list sets */
+
+/* ---------- DEPARTMENTS ---------- */
+.depts { display: flex; flex-direction: column; min-height: 0; }
+.depts h2 {
+  font-weight: 500; font-size: 14px; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--gold); padding-bottom: 10px; border-bottom: 1px solid var(--line);
 }
-.card:hover { border-color: var(--gold); background: rgba(216,178,90,0.05); transform: translateY(-3px); }
-.card .num {
-  font-family: var(--hebrew);
-  color: var(--gold);
-  font-size: 26px;
-  line-height: 1;
-  float: left;
-  margin: 2px 12px 0 0;
+.depts ul { list-style: none; }
+.depts li { border-bottom: 1px solid var(--line); }
+.depts a {
+  display: grid; grid-template-columns: 30px 1fr auto; column-gap: 12px; align-items: baseline;
+  padding: 4px 10px 5px 4px; color: inherit; text-decoration: none;
+  transition: background 0.2s, color 0.2s;
 }
-.card h3 {
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 1.2;
-  margin-bottom: 14px;
-}
-.card ul { list-style: none; color: var(--muted); font-size: 18px; }
-.card li { padding: 2px 0; font-size: 17px; border-top: 1px solid rgba(255,255,255,0.06); }
-.card li:first-child { border-top: 0; }
-.card li a { display: flex; justify-content: space-between; gap: 8px; color: inherit; text-decoration: none; transition: color 0.2s; }
-.card li a::after { content: "→"; color: var(--gold); }
-.card li a:hover { color: var(--gold); }
-.card p { color: var(--muted); font-size: 18px; }
-.card .go {
-  margin-top: auto;
-  padding-top: 12px;
-  font-size: 14px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--gold);
-}
+.depts a::after { content: "→"; grid-column: 3; grid-row: 1; color: var(--gold); opacity: 0.5; transition: opacity 0.2s, transform 0.2s; }
+.depts a:hover { background: rgba(216,178,90,0.06); }
+.depts a:hover::after { opacity: 1; transform: translateX(3px); }
+.depts a:hover .t { color: var(--gold); }
+.depts .n { grid-row: 1 / span 2; font-family: var(--hebrew); color: var(--gold); font-size: 22px; line-height: 1.2; text-align: center; }
+.depts .t { font-size: 20px; font-weight: 600; line-height: 1.2; transition: color 0.2s; }
+.depts .d { grid-column: 2 / span 2; color: var(--muted); font-size: 15.5px; line-height: 1.3; font-style: italic; }
 
 /* ---------- FOOTER ---------- */
 body { padding-bottom: 56px; }
@@ -248,24 +231,28 @@ footer .fine [lang="he"] { letter-spacing: 0; font-family: var(--hebrew); font-s
 @media (max-width: 1000px) {
   .nav .etym { display: none; }
   .hero { grid-template-columns: 140px 1fr; }
-  .hero .seal { width: 140px; }
-  .motto { grid-column: 1 / -1; border-left: 0; border-top: 1px solid var(--line); padding: 24px 0 0; }
+  .hero { grid-template-columns: 72px 1fr auto; }
+  .motto { padding-left: 16px; }
+  .motto .he { font-size: 26px; }
+  .motto .translit, .motto .en { display: none; }
 }
 @media (max-width: 900px) {
-  .cards { grid-template-columns: repeat(2, 1fr); }
+  main.wrap { height: auto; }
+  .body-grid { grid-template-columns: 1fr; gap: 28px; }
+  .body-grid .intro { contain: none; height: 300px; }
 }
 @media (max-width: 560px) {
   body { font-size: 17px; }
   .wrap { padding: 0 16px; }
-  .cards { grid-template-columns: 1fr; }
   .nav .wrap { gap: 16px; }
   .nav .links { gap: 18px; }
-  .hero { grid-template-columns: 1fr; gap: 20px; padding-top: 28px; }
-  .hero .seal { width: 130px; justify-self: center; }
-  .rotator { height: 2.3em; margin-top: 24px; }
-  main.wrap { height: auto; }
-  .intro { flex: none; height: 340px; margin: 24px auto; }
-  .intro .chunk { font-size: 22px; }
+  .hero { grid-template-columns: 52px 1fr auto; gap: 12px; }
+  .hero .seal { width: 52px; }
+  .motto .he { font-size: 22px; }
+  .body-grid .intro { height: 260px; }
+  .intro .chunk { font-size: 20px; }
+  .depts .t { font-size: 20px; }
+  .depts .d { font-size: 16px; }
   body { padding-bottom: 96px; }
   footer .wrap { flex-direction: column; gap: 2px; padding-top: 8px; padding-bottom: 8px; text-align: center; font-size: 15px; }
   footer .fine { display: none; }
