@@ -80,9 +80,9 @@ main.wrap {
 /* ---------- HERO ---------- */
 .hero {
   display: grid;
-  grid-template-columns: 220px 1fr 220px;
+  grid-template-columns: auto auto 1fr;
   align-items: center;
-  gap: 24px;
+  gap: 32px;
   padding: 10px 0 8px;
   border-bottom: 1px solid var(--line);
 }
@@ -161,20 +161,23 @@ main.wrap {
 
 /* ---------- MOTTO ---------- */
 .motto {
-  text-align: center;
+  display: flex; align-items: center; justify-content: center; gap: 32px;
   border-left: 1px solid var(--line);
-  padding-left: 20px;
+  padding-left: 32px;
+  min-height: 84px;
 }
+.motto .gloss { text-align: center; }
 .motto .he {
   font-family: var(--hebrew);
   font-weight: 500;
-  font-size: 32px;
-  line-height: 1.1;
+  font-size: 56px;
+  line-height: 1;
+  white-space: nowrap;
   color: var(--gold);
   direction: rtl;
 }
-.motto .translit { margin-top: 4px; font-size: 16px; letter-spacing: 0.08em; }
-.motto .en { font-style: italic; color: var(--muted); font-size: 14px; line-height: 1.3; margin-top: 4px; white-space: nowrap; }
+.motto .translit { font-size: 28px; letter-spacing: 0.08em; line-height: 1.2; }
+.motto .en { font-style: italic; color: var(--muted); font-size: 21px; line-height: 1.3; margin-top: 4px; white-space: nowrap; }
 
 /* ---------- BODY: intro scroll beside the departments ---------- */
 .body-grid {
@@ -232,11 +235,16 @@ footer .fine [lang="he"] { letter-spacing: 0; font-family: var(--hebrew); font-s
 
 @media (max-width: 1000px) {
   .nav .etym { display: none; }
-  .hero { grid-template-columns: 140px 1fr; }
-  .hero { grid-template-columns: 72px 1fr auto; }
-  .motto { padding-left: 16px; }
-  .motto .he { font-size: 26px; }
-  .motto .translit, .motto .en { display: none; }
+  .hero { gap: 20px; }
+  .motto { padding-left: 20px; gap: 20px; }
+  .motto .he { font-size: 40px; }
+  .motto .translit { font-size: 20px; }
+  .motto .en { font-size: 16px; }
+}
+@media (max-width: 800px) {
+  .motto .he { font-size: 30px; }
+  .motto .translit { font-size: 17px; }
+  .motto .en { font-size: 14px; }
 }
 @media (max-width: 900px) {
   main.wrap { height: auto; }
@@ -250,9 +258,12 @@ footer .fine [lang="he"] { letter-spacing: 0; font-family: var(--hebrew); font-s
   .wrap { padding: 0 16px; }
   .nav .wrap { gap: 16px; }
   .nav .links { gap: 18px; }
-  .hero { grid-template-columns: 52px 1fr auto; gap: 12px; }
+  .hero { grid-template-columns: 52px auto; gap: 12px 16px; }
   .hero .seal { width: 52px; }
-  .motto .he { font-size: 22px; }
+  .motto { grid-column: 1 / -1; border-left: 0; border-top: 1px solid var(--line); padding: 10px 0 0; min-height: 0; gap: 16px; }
+  .motto .he { font-size: 34px; }
+  .motto .translit { font-size: 18px; }
+  .motto .en { font-size: 14px; white-space: normal; }
   .body-grid .intro { height: 260px; }
   .intro .chunk { font-size: 20px; }
   .depts .t { font-size: 20px; }
