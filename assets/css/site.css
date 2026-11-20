@@ -7,9 +7,9 @@
 }
 
 :root {
-  --bg: #fbfaf7;
+  --bg: #efe6d6;              /* warm brownish beige */
   --ink: #1b1a17;
-  --muted: #5f5a50;
+  --muted: #554e43;
   --gold: #8a6a24;            /* muted, dark enough to read on paper */
   --line: rgba(27, 26, 23, 0.14);
   /* the starry intro panel keeps the night palette */
@@ -28,7 +28,7 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: var(--serif);
-  font-size: 19px;
+  font-size: 21px;
   line-height: 1.6;
   font-weight: 500;
   overflow-x: hidden;
@@ -57,24 +57,24 @@ main.wrap {
 /* ---------- NAV ---------- */
 .nav {
   border-bottom: 1px solid var(--line);
-  background: rgba(251, 250, 247, 0.92);
+  background: rgba(239, 230, 214, 0.94);
   backdrop-filter: blur(8px);
   position: sticky; top: 0; z-index: 10;
 }
-.nav .wrap {
-  display: flex; align-items: center; gap: 28px;
-  height: 60px;
+.nav .wrap {   /* everything sits on the name's baseline */
+  display: flex; align-items: baseline; gap: 28px;
+  padding-top: 17px; padding-bottom: 15px;
 }
 .brand { display: flex; align-items: baseline; gap: 10px; text-decoration: none; color: var(--ink); white-space: nowrap; }
-.brand .y { font-family: var(--jedi); color: var(--ink); font-size: 22px; letter-spacing: 0.02em; }
-.brand .i { letter-spacing: 0.3em; text-transform: uppercase; font-size: 13px; font-weight: 600; }
-.nav .etym { font-style: italic; color: var(--muted); font-size: 17px; white-space: nowrap; }
+.brand .y { font-family: var(--jedi); color: var(--ink); font-size: 23px; letter-spacing: 0.02em; line-height: 1; }
+.brand .i { letter-spacing: 0.3em; text-transform: uppercase; font-size: 14px; font-weight: 600; }
+.nav .etym { font-style: italic; color: var(--muted); font-size: 19px; white-space: nowrap; line-height: 1; }
 .nav .etym .q { opacity: 0.85; }
 .nav .etym b { font-style: normal; font-weight: 600; color: var(--ink); }
 .nav .links { margin-left: auto; display: flex; gap: 28px; }
 .nav .links a {
   color: var(--ink); text-decoration: none;
-  letter-spacing: 0.2em; text-transform: uppercase; font-size: 14px; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase; font-size: 15px; font-weight: 600; line-height: 1;
 }
 .nav .links a:hover { color: var(--gold); }
 .nav .links a.join { color: var(--gold); }
@@ -105,7 +105,7 @@ main.wrap {
   font-weight: 500;
   letter-spacing: 0.6em;
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 13px;
   margin-top: 6px;
   padding-left: 0.6em; /* balance letter-spacing */
 }
@@ -143,7 +143,7 @@ main.wrap {
 }
 .intro .chunks { will-change: transform; }
 .intro .chunk {
-  font-size: 24px;
+  font-size: 26px;
   line-height: 1.45;
   padding-bottom: 1.6em;
 }
@@ -156,7 +156,7 @@ main.wrap {
   opacity: 0.6;
 }
 .intro .chunk em { font-style: normal; color: var(--sky-gold); }
-.intro .tagline { font-style: italic; color: var(--sky-gold); font-size: 34px; line-height: 1.2; }
+.intro .tagline { font-style: italic; color: var(--sky-gold); font-size: 36px; line-height: 1.2; }
 .intro .tagline::after { display: none; }
 @media (prefers-reduced-motion: reduce) {
   .intro { overflow-y: auto; }
@@ -180,8 +180,8 @@ main.wrap {
   color: var(--ink);
   direction: rtl;
 }
-.motto .translit { font-size: 28px; letter-spacing: 0.08em; line-height: 1.2; }
-.motto .en { font-style: italic; color: var(--muted); font-size: 21px; line-height: 1.3; margin-top: 4px; white-space: nowrap; }
+.motto .translit { font-size: 30px; letter-spacing: 0.08em; line-height: 1.2; }
+.motto .en { font-style: italic; color: var(--muted); font-size: 23px; line-height: 1.3; margin-top: 4px; white-space: nowrap; }
 
 /* ---------- BODY: intro scroll beside the departments ---------- */
 .body-grid {
@@ -194,7 +194,7 @@ main.wrap {
 /* ---------- DEPARTMENTS ---------- */
 .depts { display: flex; flex-direction: column; min-height: 0; }
 .depts h2 {
-  font-weight: 500; font-size: 14px; letter-spacing: 0.28em; text-transform: uppercase;
+  font-weight: 600; font-size: 15px; letter-spacing: 0.28em; text-transform: uppercase;
   color: var(--gold); padding-bottom: 10px; border-bottom: 1px solid var(--line);
 }
 .depts ul { list-style: none; flex: 1; display: flex; flex-direction: column; }
@@ -210,26 +210,26 @@ main.wrap {
 .depts a:hover::after { opacity: 1; transform: translateX(3px); }
 .depts a:hover .t { color: var(--gold); }
 .depts .n { grid-row: 1 / span 2; font-family: var(--hebrew); color: var(--gold); font-size: 22px; line-height: 1.2; text-align: center; }
-.depts .t { font-size: 20px; font-weight: 600; line-height: 1.2; transition: color 0.2s; }
-.depts .d { grid-column: 1 / span 2; color: var(--muted); font-size: 15.5px; line-height: 1.3; font-style: italic; }
+.depts .t { font-size: 22px; font-weight: 600; line-height: 1.2; transition: color 0.2s; }
+.depts .d { grid-column: 1 / span 2; color: var(--muted); font-size: 17.5px; line-height: 1.3; font-style: italic; }
 
 /* ---------- FOOTER ---------- */
 body { padding-bottom: 56px; }
 footer {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
   border-top: 1px solid var(--line);
-  background: rgba(251, 250, 247, 0.94);
+  background: rgba(239, 230, 214, 0.95);
   backdrop-filter: blur(8px);
 }
 footer .wrap {
   display: flex; align-items: center; justify-content: space-between; gap: 24px;
   min-height: 48px;
-  font-size: 17px;
+  font-size: 19px;
 }
 footer .pin { width: 16px; height: 16px; fill: var(--gold); vertical-align: -2px; margin-right: 6px; }
 footer .hidden { font-style: italic; color: var(--muted); }
 footer .fine {
-  font-size: 13px;
+  font-size: 14px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--muted);
@@ -258,7 +258,7 @@ footer .fine [lang="he"] { letter-spacing: 0; font-family: var(--hebrew); font-s
   .depts a { padding-top: 8px; padding-bottom: 8px; }
 }
 @media (max-width: 560px) {
-  body { font-size: 17px; }
+  body { font-size: 18px; }
   .wrap { padding: 0 16px; }
   .nav .wrap { gap: 16px; }
   .nav .links { gap: 18px; }
@@ -266,13 +266,13 @@ footer .fine [lang="he"] { letter-spacing: 0; font-family: var(--hebrew); font-s
   .hero .seal { width: 52px; }
   .motto { grid-column: 1 / -1; border-left: 0; border-top: 1px solid var(--line); padding: 10px 0 0; min-height: 0; gap: 16px; }
   .motto .he { font-size: 34px; }
-  .motto .translit { font-size: 18px; }
-  .motto .en { font-size: 14px; white-space: normal; }
-  .body-grid .sky { height: 260px; }
+  .motto .translit { font-size: 19px; }
+  .motto .en { font-size: 15px; white-space: normal; }
+  .body-grid .sky { height: 280px; }
   .intro { padding: 0 16px; }
-  .intro .chunk { font-size: 20px; }
-  .depts .t { font-size: 20px; }
-  .depts .d { font-size: 16px; }
+  .intro .chunk { font-size: 21px; }
+  .depts .t { font-size: 21px; }
+  .depts .d { font-size: 17px; }
   body { padding-bottom: 96px; }
   footer .wrap { flex-direction: column; gap: 2px; padding-top: 8px; padding-bottom: 8px; text-align: center; font-size: 15px; }
   footer .fine { display: none; }
