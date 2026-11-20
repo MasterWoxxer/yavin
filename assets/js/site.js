@@ -59,15 +59,17 @@
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
   let stars = [];
 
+  let W = 0, H = 0;   // sized to the panel the canvas sits in
   function resize() {
     const dpr = window.devicePixelRatio || 1;
-    c.width = innerWidth * dpr;
-    c.height = innerHeight * dpr;
+    W = c.clientWidth; H = c.clientHeight;
+    c.width = W * dpr;
+    c.height = H * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const n = Math.round((innerWidth * innerHeight) / 5000);
+    const n = Math.round((W * H) / 4000);
     stars = Array.from({ length: n }, () => ({
-      x: Math.random() * innerWidth,
-      y: Math.random() * innerHeight,
+      x: Math.random() * W,
+      y: Math.random() * H,
       r: Math.random() * 1.1 + 0.2,
       p: Math.random() * Math.PI * 2,
       s: Math.random() * 0.015 + 0.004
@@ -75,7 +77,7 @@
   }
 
   function draw() {
-    ctx.clearRect(0, 0, innerWidth, innerHeight);
+    ctx.clearRect(0, 0, W, H);
     for (const s of stars) {
       if (!still) s.p += s.s;
       const a = 0.35 + 0.45 * (0.5 + 0.5 * Math.sin(s.p));

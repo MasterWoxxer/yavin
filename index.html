@@ -15,8 +15,6 @@
 </head>
 <body>
 
-<div class="stars"><canvas id="sky"></canvas></div>
-
 <!-- NAV -->
 <nav class="nav">
   <div class="wrap">
@@ -139,7 +137,8 @@
 
 
   <div class="body-grid">
-  <!-- INTRO: taglines + five paragraphs, slow continuous scroll -->
+  <!-- INTRO: taglines + five paragraphs, slow continuous scroll, on its own starfield -->
+  <div class="sky"><canvas id="sky"></canvas>
   <section class="intro" aria-label="About Yavin Institute">
     <div class="chunks">
       <p class="chunk">
@@ -175,6 +174,7 @@
       </p>
     </div>
   </section>
+  </div>
 
   <!-- DEPARTMENTS -->
   <section class="depts" aria-labelledby="depts-h">

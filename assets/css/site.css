@@ -7,14 +7,15 @@
 }
 
 :root {
-  --bg: #07080d;
-  --bg-2: #0d0f18;
-  --ink: #ece6d6;
-  --muted: #9c9687;
-  --gold: #d8b25a;
-  --gold-deep: #9c7a2e;
-  --line: rgba(216, 178, 90, 0.22);
-  --card: rgba(255, 255, 255, 0.025);
+  --bg: #fbfaf7;
+  --ink: #1b1a17;
+  --muted: #5f5a50;
+  --gold: #8a6a24;            /* muted, dark enough to read on paper */
+  --line: rgba(27, 26, 23, 0.14);
+  /* the starry intro panel keeps the night palette */
+  --sky-bg: #07080d;
+  --sky-ink: #ece6d6;
+  --sky-gold: #d8b25a;
   --serif: "Cormorant Garamond", Georgia, serif;
   --hebrew: "Frank Ruhl Libre", "Times New Roman", serif;
   --jedi: "Star Jedi", "Arial Black", sans-serif;
@@ -29,19 +30,20 @@ body {
   font-family: var(--serif);
   font-size: 19px;
   line-height: 1.6;
+  font-weight: 500;
   overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
 }
 
-/* starfield */
-.stars {
-  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+/* starfield: only behind the scrolling intro */
+.sky {
+  position: relative; display: flex; overflow: hidden;
+  border-radius: 4px;
   background:
     radial-gradient(ellipse at 50% -10%, rgba(216,178,90,0.10), transparent 60%),
     radial-gradient(ellipse at 50% 120%, rgba(60,80,140,0.14), transparent 60%),
-    var(--bg);
+    var(--sky-bg);
 }
-.stars canvas { width: 100%; height: 100%; display: block; }
+.sky canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
 
 .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
 
@@ -55,7 +57,7 @@ main.wrap {
 /* ---------- NAV ---------- */
 .nav {
   border-bottom: 1px solid var(--line);
-  background: rgba(7, 8, 13, 0.7);
+  background: rgba(251, 250, 247, 0.92);
   backdrop-filter: blur(8px);
   position: sticky; top: 0; z-index: 10;
 }
@@ -64,7 +66,7 @@ main.wrap {
   height: 60px;
 }
 .brand { display: flex; align-items: baseline; gap: 10px; text-decoration: none; color: var(--ink); white-space: nowrap; }
-.brand .y { font-family: var(--jedi); color: var(--gold); font-size: 22px; letter-spacing: 0.02em; }
+.brand .y { font-family: var(--jedi); color: var(--ink); font-size: 22px; letter-spacing: 0.02em; }
 .brand .i { letter-spacing: 0.3em; text-transform: uppercase; font-size: 13px; font-weight: 600; }
 .nav .etym { font-style: italic; color: var(--muted); font-size: 17px; white-space: nowrap; }
 .nav .etym .q { opacity: 0.85; }
@@ -88,7 +90,7 @@ main.wrap {
 }
 .hero .seal { width: 72px; justify-self: start; }
 
-.seal { width: 100%; height: auto; filter: drop-shadow(0 0 24px rgba(216,178,90,0.18)); }
+.seal { width: 100%; height: auto; }
 
 .title { text-align: center; }
 .wordmark {
@@ -96,9 +98,8 @@ main.wrap {
   font-size: clamp(36px, 5vw, 60px);
   line-height: 0.9;
   color: transparent;
-  -webkit-text-stroke: 1.5px var(--gold);
+  -webkit-text-stroke: 1.3px var(--ink);
   letter-spacing: 0.02em;
-  text-shadow: 0 0 40px rgba(216,178,90,0.25);
 }
 .institute {
   font-weight: 500;
@@ -132,6 +133,8 @@ main.wrap {
   min-height: 0;
   width: 100%;
   margin: 0;
+  padding: 0 28px;
+  color: var(--sky-ink);
   text-align: center;
   overflow: hidden;
   position: relative;
@@ -149,11 +152,11 @@ main.wrap {
   display: block;
   width: 48px; height: 1px;
   margin: 1.6em auto 0;
-  background: var(--gold);
+  background: var(--sky-gold);
   opacity: 0.6;
 }
-.intro .chunk em { font-style: normal; color: var(--gold); }
-.intro .tagline { font-style: italic; color: var(--gold); font-size: 34px; line-height: 1.2; }
+.intro .chunk em { font-style: normal; color: var(--sky-gold); }
+.intro .tagline { font-style: italic; color: var(--sky-gold); font-size: 34px; line-height: 1.2; }
 .intro .tagline::after { display: none; }
 @media (prefers-reduced-motion: reduce) {
   .intro { overflow-y: auto; }
@@ -173,7 +176,7 @@ main.wrap {
   font-size: 56px;
   line-height: 1;
   white-space: nowrap;
-  color: var(--gold);
+  color: var(--ink);
   direction: rtl;
 }
 .motto .translit { font-size: 28px; letter-spacing: 0.08em; line-height: 1.2; }
@@ -185,7 +188,7 @@ main.wrap {
   display: grid; grid-template-columns: 1fr 460px; gap: 40px;
   padding: 14px 0 12px;
 }
-.body-grid .intro { contain: size; height: auto; }   /* takes the height the departments list sets */
+.body-grid .sky { contain: size; height: auto; }   /* takes the height the departments list sets */
 
 /* ---------- DEPARTMENTS ---------- */
 .depts { display: flex; flex-direction: column; min-height: 0; }
@@ -202,7 +205,7 @@ main.wrap {
   transition: background 0.2s, color 0.2s;
 }
 .depts a::after { content: "→"; grid-column: 2; grid-row: 1; color: var(--gold); opacity: 0.5; transition: opacity 0.2s, transform 0.2s; }
-.depts a:hover { background: rgba(216,178,90,0.06); }
+.depts a:hover { background: rgba(138,106,36,0.06); }
 .depts a:hover::after { opacity: 1; transform: translateX(3px); }
 .depts a:hover .t { color: var(--gold); }
 .depts .n { grid-row: 1 / span 2; font-family: var(--hebrew); color: var(--gold); font-size: 22px; line-height: 1.2; text-align: center; }
@@ -214,7 +217,7 @@ body { padding-bottom: 56px; }
 footer {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
   border-top: 1px solid var(--line);
-  background: rgba(7, 8, 13, 0.85);
+  background: rgba(251, 250, 247, 0.94);
   backdrop-filter: blur(8px);
 }
 footer .wrap {
@@ -223,7 +226,7 @@ footer .wrap {
   font-size: 17px;
 }
 footer .pin { width: 16px; height: 16px; fill: var(--gold); vertical-align: -2px; margin-right: 6px; }
-footer .hidden { font-style: italic; color: var(--gold); }
+footer .hidden { font-style: italic; color: var(--muted); }
 footer .fine {
   font-size: 13px;
   letter-spacing: 0.2em;
@@ -249,7 +252,7 @@ footer .fine [lang="he"] { letter-spacing: 0; font-family: var(--hebrew); font-s
 @media (max-width: 900px) {
   main.wrap { height: auto; }
   .body-grid { grid-template-columns: 1fr; gap: 28px; }
-  .body-grid .intro { contain: none; height: 300px; }
+  .body-grid .sky { contain: none; height: 300px; }
   .depts li { flex: none; }
   .depts a { padding-top: 8px; padding-bottom: 8px; }
 }
@@ -264,7 +267,8 @@ footer .fine [lang="he"] { letter-spacing: 0; font-family: var(--hebrew); font-s
   .motto .he { font-size: 34px; }
   .motto .translit { font-size: 18px; }
   .motto .en { font-size: 14px; white-space: normal; }
-  .body-grid .intro { height: 260px; }
+  .body-grid .sky { height: 260px; }
+  .intro { padding: 0 16px; }
   .intro .chunk { font-size: 20px; }
   .depts .t { font-size: 20px; }
   .depts .d { font-size: 16px; }
