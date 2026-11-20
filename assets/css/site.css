@@ -164,12 +164,13 @@ main.wrap {
 
 /* ---------- MOTTO ---------- */
 .motto {
-  display: flex; align-items: center; justify-content: center; gap: 32px;
+  display: flex; align-items: center; justify-content: flex-end; gap: 32px;
   border-left: 1px solid var(--line);
   padding-left: 32px;
   min-height: 84px;
 }
-.motto .gloss { text-align: center; }
+.motto .gloss { text-align: right; }
+.motto .he { order: 2; }   /* Hebrew sits at the far right, its gloss to the left */
 .motto .he {
   font-family: var(--hebrew);
   font-weight: 500;
